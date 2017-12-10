@@ -1,0 +1,22 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "babel-polyfill": "6.7.4",
+    "bootstrap": "3.3.6",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.31.5",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17",
+    "redux": "3.4.0",
+    "redux-thunk": "2.0.1",
+    "toastr": "2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

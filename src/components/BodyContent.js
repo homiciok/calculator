@@ -26,30 +26,28 @@ export class BodyContent extends React.Component  {
 		console.log(typeof this.state.output);
 	}
 
-	clearClick(event){
+	equalButtonClick(event){
+		this.setState({
+		})
+	}
+
+	clearButtonClick(event){
 		this.setState({
 			output: '',
 			input: ''
 		})
 	}
 
-	equalClick(event){
-		this.setState({
-		})
-	}
-
-
 	render() {
 		return (
 			<div className="calculator">
 
-				<div className="input">
+				<div className="output">
 					{this.state.output.length !== 0
-						? this.state.output : 0
+						? this.state.output 
+						: 0
 					}
 				</div>
-
-
 					<div className="buttons">
 						<div className="operators">
 							<button type="button" value="+" onClick={this.handleOperation.bind(this)}>+</button>
@@ -75,10 +73,10 @@ export class BodyContent extends React.Component  {
 							</div>
 							<div className="numbers">
 								<button id="zero" value="0" onClick={this.handleClick.bind(this)}>0</button>
-								<button id="clear" type="button" onClick={this.clearClick.bind(this)}>Clear</button>
+								<button id="clear" type="button" onClick={this.clearButtonClick.bind(this)}>Clear</button>
 							</div>
 						</div>
-						<button className="equal" type="button" onClick={this.equalClick.bind(this)}>=</button>
+						<button className="equal" type="button" onClick={this.equalButtonClick.bind(this)}>=</button>
 					</div>
 			</div>
 		)

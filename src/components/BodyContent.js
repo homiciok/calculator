@@ -14,7 +14,6 @@ export class BodyContent extends React.Component  {
 		this.setState({
 			output: this.state.output.concat([event.target.value])
 		})
-		console.log(this.state.output);
 	}
 
 	handleOperation(event) {
@@ -22,30 +21,10 @@ export class BodyContent extends React.Component  {
 		this.setState({
 			output: this.state.output.concat([event.target.value])
 		});
-
-		console.log(typeof this.state.output);
 	}
 
 	equalButtonClick(event){
 
-		const operations = [{
-			"*" : function(a, b) {
-				return a * b;
-			},
-			"/" : function(a, b) {
-				return a / b;
-			}
-		},
-		{
-            "+": function(a, b) {
-                return a + b
-            },
-
-            "-": function(a, b) {
-                return a - b
-            }
-		}
-		]
 		console.log("fsdfdsf", typeof operations);
 		const output = this.state.output.toString();
 		const regexSign = /[*/+-]/i;
@@ -68,7 +47,17 @@ export class BodyContent extends React.Component  {
 		
 		console.log("numbers", numbersArray);
 
-
+		let a, b;
+		switch(operationArray){
+			case "*":
+				return a * b;
+			case "/":
+				return a / b;
+			case "+":
+				return a + b;
+			case "-":
+				return a - b;
+		}
 
 		this.setState({	
 		})

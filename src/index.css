@@ -63,7 +63,7 @@ body {
   display: inline-block;
 }
 
-.numbers button {
+.rows button {
   display: inline-block;
   border: 1px solid #ddd;
   border-radius: 1px;
@@ -80,13 +80,13 @@ body {
   width: 165px;
 }
 
-.numbers button:hover {
+.rows button:hover {
   background-color: #f1f1f1;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
   border-color: #bbb;
 }
 
-.numbers button:active {
+.rows button:active {
   font-weight: bold;
 }
 

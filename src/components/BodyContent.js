@@ -27,16 +27,50 @@ export class BodyContent extends React.Component  {
 	}
 
 	equalButtonClick(event){
-		const output = this.state.output.toString();
-		const regex = /[*/+-]/i;
-		console.log('output', output);
 
-		for (var i = output.length - 1; i >= 0; i--) {
-			if (regex.test(output[i])) {
-				console.log(output[i]);
+		const operations = [{
+			"*" : function(a, b) {
+				return a * b;
+			},
+			"/" : function(a, b) {
+				return a / b;
+			}
+		},
+		{
+            "+": function(a, b) {
+                return a + b
+            },
+
+            "-": function(a, b) {
+                return a - b
+            }
+		}
+		]
+		console.log("fsdfdsf", typeof operations);
+		const output = this.state.output.toString();
+		const regexSign = /[*/+-]/i;
+		let numbersArray = [];
+		let operationArray = [];
+
+		for (var i = 0; i < output.length; i++) {
+			if (regexSign.test(output[i])) {
+				operationArray.push(output[i]);			
+			} else {
+				numbersArray.push(output[i]);
 			}
 		}
-		this.setState({
+
+		const stringDigit = numbersArray.join("");
+		const stringNumber = stringDigit.replace(/((,)(?=\d))/g, "");
+		numbersArray = stringNumber.split(",");
+
+		console.log("signs", operationArray);
+		
+		console.log("numbers", numbersArray);
+
+
+
+		this.setState({	
 		})
 	}
 

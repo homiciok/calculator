@@ -9,6 +9,7 @@
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
+    "react-string-replace": "^0.4.1",
     "redux": "3.4.0",
     "redux-thunk": "2.0.1",
     "toastr": "2.1.2"

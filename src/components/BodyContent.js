@@ -33,7 +33,7 @@ export class BodyContent extends React.Component  {
 
 		for (var i = 0; i < output.length; i++) {
 			if (regexSign.test(output[i])) {
-				operationArray.push(output[i]);			
+				operationArray.push(output[i]);
 			} else {
 				numbersArray.push(output[i]);
 			}
@@ -44,22 +44,37 @@ export class BodyContent extends React.Component  {
 		numbersArray = stringNumber.split(",");
 
 		console.log("signs", operationArray);
-		
+
 		console.log("numbers", numbersArray);
 
-		let a, b;
-		switch(operationArray){
-			case "*":
-				return a * b;
-			case "/":
-				return a / b;
-			case "+":
-				return a + b;
-			case "-":
-				return a - b;
-		}
+    while (operationArray.length) {
+      let a = Number(numbersArray.pop());
+      let b = Number(numbersArray.pop());
+      let result = 0;
 
-		this.setState({	
+      switch (operationArray.pop()) {
+        case "+":
+          result = a + b;
+          break;
+
+        case "-":
+          result = a - b;
+          break;
+
+        case "*":
+          result = a * b;
+          break;
+
+        case "/":
+          result = a / b;
+          break;
+      }
+
+      numbersArray = [result].concat(numbersArray);
+    }
+
+		this.setState({
+      output: numbersArray
 		})
 	}
 
@@ -76,7 +91,7 @@ export class BodyContent extends React.Component  {
 
 				<div className="output">
 					{this.state.output.length !== 0
-						? this.state.output 
+						? this.state.output
 						: 0
 					}
 				</div>

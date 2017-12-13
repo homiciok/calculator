@@ -23,55 +23,70 @@ export class BodyContent extends React.Component  {
 		});
 	}
 
+  isNumber(num) {
+    return (typeof num === 'string' || typeof num === 'number') && !isNaN(num - 0) && num !== '';
+  };
+
 	equalButtonClick(event){
+    let postFixArray = [];
+    let operationsStack = [];
 
-		console.log("fsdfdsf", typeof operations);
-		const output = this.state.output.toString();
-		const regexSign = /[*/+-]/i;
-		let numbersArray = [];
-		let operationArray = [];
+    let number = "";
+    let self = this;
+    this.state.output.forEach(function(element) {
+        if (self.isNumber(element)) {
+          number += element;
+        } else {
+          postFixArray.push(Number(number));
+          if (element === "/" || element === "*") {
+            operationsStack.push(element);
+          } else {
+            if (operationsStack.length)
+              postFixArray.push(operationsStack.pop());
+            operationsStack.push(element);
+          }
+          number = "";
+        }
+    });
 
-		for (var i = 0; i < output.length; i++) {
-			if (regexSign.test(output[i])) {
-				operationArray.push(output[i]);
-			} else {
-				numbersArray.push(output[i]);
-			}
-		}
-
-		const stringDigit = numbersArray.join("");
-		const stringNumber = stringDigit.replace(/((,)(?=\d))/g, "");
-		numbersArray = stringNumber.split(",");
-
-		console.log("signs", operationArray);
-
-		console.log("numbers", numbersArray);
-
-    while (operationArray.length) {
-      let a = Number(numbersArray.pop());
-      let b = Number(numbersArray.pop());
-      let result = 0;
-
-      switch (operationArray.pop()) {
-        case "+":
-          result = a + b;
-          break;
-
-        case "-":
-          result = a - b;
-          break;
-
-        case "*":
-          result = a * b;
-          break;
-
-        case "/":
-          result = a / b;
-          break;
-      }
-
-      numbersArray = [result].concat(numbersArray);
+    if (number !== "") {
+      postFixArray.push(Number(number));
     }
+
+    while (operationsStack.length) {
+      postFixArray.push(operationsStack.pop());
+    }
+
+    let numbersArray = [];
+
+    postFixArray.forEach(function(element) {
+      if (typeof element !== 'number') {
+        let a = numbersArray.pop();
+        let b = numbersArray.pop();
+        let result = 0;
+
+        switch (element) {
+          case "+":
+            result = a + b;
+            break;
+
+          case "-":
+            result = a - b;
+            break;
+
+          case "*":
+            result = a * b;
+            break;
+
+          case "/":
+            result = a / b;
+            break;
+        }
+        numbersArray.push(result)
+      } else {
+        numbersArray.push(element);
+      }
+    })
 
 		this.setState({
       output: numbersArray

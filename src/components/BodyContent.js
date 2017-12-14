@@ -12,11 +12,17 @@ export class BodyContent extends React.Component  {
 		this.handleKeyUp = this.handleKeyUp.bind(this);
 	}
 
+	componentDidMount(){
+    	document.addEventListener("keyup", this.handleKeyUp, false);
+  	}
+
+
   	handleClick(event) {
 		this.setState({
 			input: this.state.input.concat([event.target.value])
 		})
 	}
+
 /*
 	isNumber(num) {
 	    return (typeof num === 'string' || typeof num === 'number') && !isNaN(num - 0) && num !== '';
@@ -97,16 +103,14 @@ export class BodyContent extends React.Component  {
 		})
 	}
 */
-
 	handleKeyUp(event) {
-		const keyName = event.key;
+		let keyName = event.key;
 		const regex = /[0-9/*+-]/i;
-		console.log('key', keyName);
 		if(regex.test(keyName)) {
 			this.setState({
 				input: this.state.input.concat([event.key])
 			})
-		} else if (keyName === '=') {
+		} else if (keyName === '=' || event.keyCode === 13) {
 			this.equalButtonClick();
 		}
 	}
@@ -127,42 +131,38 @@ export class BodyContent extends React.Component  {
 	render() {
 		return (
 			<div className="calculator">
-
 				<div className="output">
-					{this.state.input.length !== 0
-						? this.state.input
-						: 0
-					}
+					{this.state.input}
 				</div>
 					<div className="buttons">
 						<div className="operators">
-							<button type="button" value="+" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>+</button>
-							<button type="button" value="-" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>-</button>
-							<button type="button" value="/" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>/</button>
-							<button type="button" value="*" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>*</button>
+							<button type="button" value="+" onClick={this.handleClick}>+</button>
+							<button type="button" value="-" onClick={this.handleClick}>-</button>
+							<button type="button" value="/" onClick={this.handleClick}>/</button>
+							<button type="button" value="*" onClick={this.handleClick}>*</button>
 						</div>
 						<div className="left-panel">
 							<div className="rows">
-								<button type="button" value="1" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>1</button>
-								<button type="button" value="2" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>2</button>
-								<button type="button" value="3" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>3</button>
+								<button type="button" value="1" onClick={this.handleClick}>1</button>
+								<button type="button" value="2" onClick={this.handleClick}>2</button>
+								<button type="button" value="3" onClick={this.handleClick}>3</button>
 							</div>
 							<div className="rows">
-								<button type="button" value="4" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>4</button>
-								<button type="button" value="5" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>5</button>
-								<button type="button" value="6" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>6</button>
+								<button type="button" value="4" onClick={this.handleClick}>4</button>
+								<button type="button" value="5" onClick={this.handleClick}>5</button>
+								<button type="button" value="6" onClick={this.handleClick}>6</button>
 							</div>
 							<div className="rows">
-								<button type="button" value="7" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>7</button>
-								<button type="button" value="8" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>8</button>
-								<button type="button" value="9" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>9</button>
+								<button type="button" value="7" onClick={this.handleClick}>7</button>
+								<button type="button" value="8" onClick={this.handleClick}>8</button>
+								<button type="button" value="9" onClick={this.handleClick}>9</button>
 							</div>
 							<div className="rows">
-								<button id="zero" value="0" onKeyUp={this.handleKeyUp} onClick={this.handleClick}>0</button>
+								<button id="zero" value="0" onClick={this.handleClick}>0</button>
 								<button id="clear" type="button" onClick={this.clearButtonClick.bind(this)}>Clear</button>
 							</div>
 						</div>
-						<button className="equal" type="button" onKeyUp={this.handleKeyUp} onClick={this.equalButtonClick.bind(this)}>=</button>
+						<button className="equal" type="button" onClick={this.equalButtonClick.bind(this)}>=</button>
 					</div>
 			</div>
 		)

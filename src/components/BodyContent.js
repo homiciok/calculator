@@ -42,15 +42,16 @@ export class BodyContent extends React.Component  {
 
 	equalButtonClick = (event) => {
 		if (this.state.input.length !== 0) {
+      let input = this.state.input.join('');
 			this.setState({
-				input: eval(this.state.input.join(''))
+				input
 			})
 		} else {
 			this.setState({
 				input: 0
 			})
 		}
-		
+
 	}
 
 	clearButtonClick = (event) => {
@@ -123,7 +124,7 @@ export class BodyContent extends React.Component  {
 	          	if (element === "/" || element === "*") {
 	            	operationsStack.push(element);
 	            	console.log('hei', operationsStack);
-	          	} else { 
+	          	} else {
 	          		if (operationsStack.length)
  			            postFixArray.push(operationsStack.pop());
  						operationsStack.push(element);
@@ -147,14 +148,14 @@ export class BodyContent extends React.Component  {
         console.log('post', postFixArray);
 
 	    postFixArray.forEach(function(element) {
-	    
+
 		    if (typeof element !== 'number') {
 		        let a = numbersArray.shift();
 		        let b = numbersArray.shift();
 		        let result = 0;
 		        console.log('a', a, 'b',  b);
 		        switch (element) {
-					case "+": 
+					case "+":
 						result = a + b;
 					break;
 

@@ -2,26 +2,104 @@ import React from 'react';
 
 export class BodyContent extends React.Component  {
 	constructor() {
-
 		super();
 		this.state = {
-			//output: [],
 			input: []
 		}
-		this.handleClick = this.handleClick.bind(this);
-		this.handleKeyUp = this.handleKeyUp.bind(this);
+		//this.handleClick = this.handleClick.bind(this);
+		//this.handleKeyUp = this.handleKeyUp.bind(this);
 	}
 
 	componentDidMount(){
     	document.addEventListener("keyup", this.handleKeyUp, false);
   	}
 
-
-  	handleClick(event) {
+  	handleClick = (event) => {
 		this.setState({
 			input: this.state.input.concat([event.target.value])
 		})
 	}
+
+	handleKeyUp = (event) => {
+		let keyName = event.key;
+		const regex = /[0-9/*+-]/i;
+		let result = 0;
+
+		if(regex.test(keyName)) {
+			result =  this.state.input.concat([event.key]);
+			this.setState({
+				input: result
+			})
+		} else if (keyName === '=' || event.keyCode === 13) {
+			this.equalButtonClick();
+		} else if (this.state.input !== 0 ) {
+			this.setState({
+				input: []
+			})
+		}
+		console.log(typeof this.state.input);
+	}
+
+	equalButtonClick = (event) => {
+		if (this.state.input.length !== 0) {
+			this.setState({
+				input: eval(this.state.input.join(''))
+			})
+		} else {
+			this.setState({
+				input: 0
+			})
+		}
+		
+	}
+
+	clearButtonClick = (event) => {
+		this.setState({
+			input: []
+		})
+	}
+
+	render() {
+		return (
+			<div className="calculator">
+				<div className="output">
+					{this.state.input}
+				</div>
+					<div className="buttons">
+						<div className="operators">
+							<button type="button" value="+" onClick={this.handleClick}>+</button>
+							<button type="button" value="-" onClick={this.handleClick}>-</button>
+							<button type="button" value="/" onClick={this.handleClick}>/</button>
+							<button type="button" value="*" onClick={this.handleClick}>*</button>
+						</div>
+						<div className="left-panel">
+							<div className="rows">
+								<button type="button" value="1" onClick={this.handleClick}>1</button>
+								<button type="button" value="2" onClick={this.handleClick}>2</button>
+								<button type="button" value="3" onClick={this.handleClick}>3</button>
+							</div>
+							<div className="rows">
+								<button type="button" value="4" onClick={this.handleClick}>4</button>
+								<button type="button" value="5" onClick={this.handleClick}>5</button>
+								<button type="button" value="6" onClick={this.handleClick}>6</button>
+							</div>
+							<div className="rows">
+								<button type="button" value="7" onClick={this.handleClick}>7</button>
+								<button type="button" value="8" onClick={this.handleClick}>8</button>
+								<button type="button" value="9" onClick={this.handleClick}>9</button>
+							</div>
+							<div className="rows">
+								<button id="zero" value="0" onClick={this.handleClick}>0</button>
+								<button id="clear" type="button" onClick={this.clearButtonClick.bind(this)}>Clear</button>
+							</div>
+						</div>
+						<button className="equal" type="button" onClick={this.equalButtonClick.bind(this)}>=</button>
+					</div>
+			</div>
+		)
+	}
+
+}
 
 /*
 	isNumber(num) {
@@ -103,69 +181,3 @@ export class BodyContent extends React.Component  {
 		})
 	}
 */
-	handleKeyUp(event) {
-		let keyName = event.key;
-		const regex = /[0-9/*+-]/i;
-		if(regex.test(keyName)) {
-			this.setState({
-				input: this.state.input.concat([event.key])
-			})
-		} else if (keyName === '=' || event.keyCode === 13) {
-			this.equalButtonClick();
-		}
-	}
-
-	equalButtonClick(event) {
-		this.setState({
-			input: eval(this.state.input.join(''))
-		})
-	}
-
-	clearButtonClick(event) {
-		this.setState({
-			//output: [],
-			input: []
-		})
-	}
-
-	render() {
-		return (
-			<div className="calculator">
-				<div className="output">
-					{this.state.input}
-				</div>
-					<div className="buttons">
-						<div className="operators">
-							<button type="button" value="+" onClick={this.handleClick}>+</button>
-							<button type="button" value="-" onClick={this.handleClick}>-</button>
-							<button type="button" value="/" onClick={this.handleClick}>/</button>
-							<button type="button" value="*" onClick={this.handleClick}>*</button>
-						</div>
-						<div className="left-panel">
-							<div className="rows">
-								<button type="button" value="1" onClick={this.handleClick}>1</button>
-								<button type="button" value="2" onClick={this.handleClick}>2</button>
-								<button type="button" value="3" onClick={this.handleClick}>3</button>
-							</div>
-							<div className="rows">
-								<button type="button" value="4" onClick={this.handleClick}>4</button>
-								<button type="button" value="5" onClick={this.handleClick}>5</button>
-								<button type="button" value="6" onClick={this.handleClick}>6</button>
-							</div>
-							<div className="rows">
-								<button type="button" value="7" onClick={this.handleClick}>7</button>
-								<button type="button" value="8" onClick={this.handleClick}>8</button>
-								<button type="button" value="9" onClick={this.handleClick}>9</button>
-							</div>
-							<div className="rows">
-								<button id="zero" value="0" onClick={this.handleClick}>0</button>
-								<button id="clear" type="button" onClick={this.clearButtonClick.bind(this)}>Clear</button>
-							</div>
-						</div>
-						<button className="equal" type="button" onClick={this.equalButtonClick.bind(this)}>=</button>
-					</div>
-			</div>
-		)
-	}
-
-}

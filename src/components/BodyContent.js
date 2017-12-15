@@ -4,7 +4,7 @@ export class BodyContent extends React.Component  {
 	constructor() {
 		super();
 		this.state = {
-			input: []
+			input: ''
 		}
 		//this.handleClick = this.handleClick.bind(this);
 		//this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -18,6 +18,7 @@ export class BodyContent extends React.Component  {
 		this.setState({
 			input: this.state.input.concat([event.target.value])
 		})
+		console.log(typeof this.state.input, this.state.input);
 	}
 
 	handleKeyUp = (event) => {
@@ -32,25 +33,21 @@ export class BodyContent extends React.Component  {
 			})
 		} else if (keyName === '=' || event.keyCode === 13) {
 			this.equalButtonClick();
-		} else if (this.state.input !== 0 ) {
-			this.setState({
-				input: []
-			})
 		}
-		console.log(typeof this.state.input);
 	}
 
 	equalButtonClick = (event) => {
 		if (this.state.input.length !== 0) {
+			let result = eval(this.state.input).toString();
 			this.setState({
-				input: eval(this.state.input.join(''))
+				input: result
 			})
+			//console.log('input', typeof this.state.input);
 		} else {
 			this.setState({
 				input: 0
 			})
 		}
-		
 	}
 
 	clearButtonClick = (event) => {

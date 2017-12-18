@@ -5,29 +5,26 @@ export class BodyContent extends React.Component  {
 		super();
 		this.state = {
 			input: ''
-		}
-		//this.handleClick = this.handleClick.bind(this);
-		//this.handleKeyUp = this.handleKeyUp.bind(this);
+		} 
 	}
 
 	componentDidMount(){
-    	document.addEventListener("keyup", this.handleKeyUp, false);
+    	document.addEventListener("keyup", this.handleKeyUp, false)
   	}
 
   	handleClick = (event) => {
 		this.setState({
 			input: this.state.input.concat([event.target.value])
 		})
-		console.log(typeof this.state.input, this.state.input);
+		//console.log(typeof this.state.input, this.state.input);
 	}
 
 	handleKeyUp = (event) => {
 		let keyName = event.key;
 		const regex = /[0-9/*+-]/i;
-		let result = 0;
+		let result =  this.state.input.concat([event.key]);;
 
 		if(regex.test(keyName)) {
-			result =  this.state.input.concat([event.key]);
 			this.setState({
 				input: result
 			})
@@ -37,22 +34,29 @@ export class BodyContent extends React.Component  {
 	}
 
 	equalButtonClick = (event) => {
+		let value = '';
+		try {
+			value = eval(this.state.input).toString();
+		} catch (error) {
+			if (error instanceof SyntaxError) {
+				alert("The expression is not valid, please enter the expression one more time!");
+			}
+		}
+
 		if (this.state.input.length !== 0) {
-			let result = eval(this.state.input).toString();
 			this.setState({
-				input: result
+				input: value
 			})
-			//console.log('input', typeof this.state.input);
 		} else {
 			this.setState({
-				input: 0
+				input: ''
 			})
 		}
 	}
 
 	clearButtonClick = (event) => {
 		this.setState({
-			input: []
+			input: ''
 		})
 	}
 
@@ -87,10 +91,10 @@ export class BodyContent extends React.Component  {
 							</div>
 							<div className="rows">
 								<button id="zero" value="0" onClick={this.handleClick}>0</button>
-								<button id="clear" type="button" onClick={this.clearButtonClick.bind(this)}>Clear</button>
+								<button id="clear" type="button" onClick={this.clearButtonClick}>Clear</button>
 							</div>
 						</div>
-						<button className="equal" type="button" onClick={this.equalButtonClick.bind(this)}>=</button>
+						<button className="equal" type="button" onClick={this.equalButtonClick}>=</button>
 					</div>
 			</div>
 		)

@@ -67,34 +67,23 @@ export class BodyContent extends React.Component  {
 					{this.state.input}
 				</div>
 					<div className="buttons">
-						<div className="operators">
-							<button type="button" value="+" onClick={this.handleClick}>+</button>
-							<button type="button" value="-" onClick={this.handleClick}>-</button>
-							<button type="button" value="/" onClick={this.handleClick}>/</button>
-							<button type="button" value="*" onClick={this.handleClick}>*</button>
-						</div>
-						<div className="left-panel">
-							<div className="rows">
-								<button type="button" value="1" onClick={this.handleClick}>1</button>
-								<button type="button" value="2" onClick={this.handleClick}>2</button>
-								<button type="button" value="3" onClick={this.handleClick}>3</button>
-							</div>
-							<div className="rows">
-								<button type="button" value="4" onClick={this.handleClick}>4</button>
-								<button type="button" value="5" onClick={this.handleClick}>5</button>
-								<button type="button" value="6" onClick={this.handleClick}>6</button>
-							</div>
-							<div className="rows">
-								<button type="button" value="7" onClick={this.handleClick}>7</button>
-								<button type="button" value="8" onClick={this.handleClick}>8</button>
-								<button type="button" value="9" onClick={this.handleClick}>9</button>
-							</div>
-							<div className="rows">
-								<button id="zero" value="0" onClick={this.handleClick}>0</button>
-								<button id="clear" type="button" onClick={this.clearButtonClick}>Clear</button>
-							</div>
-						</div>
-						<button className="equal" type="button" onClick={this.equalButtonClick}>=</button>
+						<button className="element a symbol" type="button" value="+" onClick={this.handleClick}>+</button>
+						<button className="element b symbol" type="button" value="-" onClick={this.handleClick}>-</button>
+						<button className="element c symbol" type="button" value="/" onClick={this.handleClick}>/</button>
+						<button className="element d symbol" type="button" value="*" onClick={this.handleClick}>*</button>
+						<button className="element one" type="button" value="1" onClick={this.handleClick}>1</button>
+						<button className="element two" type="button" value="2" onClick={this.handleClick}>2</button>
+						<button className="element three" type="button" value="3" onClick={this.handleClick}>3</button>
+						<button className="element four" type="button" value="4" onClick={this.handleClick}>4</button>
+						<button className="element five" type="button" value="5" onClick={this.handleClick}>5</button>
+						<button className="element six" type="button" value="6" onClick={this.handleClick}>6</button>
+						<button className="element seven" type="button" value="7" onClick={this.handleClick}>7</button>
+						<button className="element eight" type="button" value="8" onClick={this.handleClick}>8</button>
+						<button className="element nine" type="button" value="9" onClick={this.handleClick}>9</button>
+						<button className="element zero" type="button" value="0" onClick={this.handleClick}>0</button>
+						<button className="element cl" type="button" onClick={this.clearButtonClick}>Clear</button>
+						<button className="element equal" type="button" onClick={this.equalButtonClick}>=</button>
+
 					</div>
 			</div>
 		)
